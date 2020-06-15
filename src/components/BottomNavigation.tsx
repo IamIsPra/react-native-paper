@@ -214,6 +214,8 @@ type Props = {
    * barStyle={{ paddingBottom: 48 }}
    * ```
    */
+  iconSize?: number;
+  /** Custom Icon Sizes **/
   barStyle?: StyleProp<ViewStyle>;
   style?: StyleProp<ViewStyle>;
   /**
@@ -639,6 +641,7 @@ class BottomNavigation extends React.Component<Props, State> {
       style,
       theme,
       sceneAnimationEnabled,
+      iconSize,
     } = this.props;
 
     const {
@@ -872,6 +875,8 @@ class BottomNavigation extends React.Component<Props, State> {
                       <Animated.View
                         style={[
                           styles.iconContainer,
+                          { height: iconSize || 24 },
+                          { width: iconSize || 24 },
                           { transform: [{ translateY }] },
                         ]}
                       >
@@ -891,7 +896,7 @@ class BottomNavigation extends React.Component<Props, State> {
                             <Icon
                               source={route.icon as IconSource}
                               color={activeTintColor}
-                              size={24}
+                              size={iconSize || 26}
                             />
                           )}
                         </Animated.View>
@@ -911,7 +916,7 @@ class BottomNavigation extends React.Component<Props, State> {
                             <Icon
                               source={route.icon as IconSource}
                               color={inactiveTintColor}
-                              size={24}
+                              size={iconSize || 24}
                             />
                           )}
                         </Animated.View>
@@ -1040,8 +1045,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   iconContainer: {
-    height: 24,
-    width: 24,
     marginTop: 2,
     marginHorizontal: 12,
     alignSelf: 'center',
